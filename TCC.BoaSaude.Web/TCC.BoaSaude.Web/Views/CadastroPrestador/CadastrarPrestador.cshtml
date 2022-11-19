@@ -1,0 +1,118 @@
+﻿@model TCC.BoaSaude.Web.Models.PrestadorModel
+
+@{
+    ViewData["Title"] = "CadastroPrestador";
+}
+<div id="cadastro-usuario">
+    <div class="row">
+        <div class="col-md-12 section-header" style="text-align: left; border-bottom: 1px solid; border-bottom-color: #eaeaea; padding-bottom:10px;">
+            <h3 class="title">
+                DADOS DO PRESTADOR
+            </h3>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <form class="col-md-12" asp-action="RegistrarCliente">
+            <div class="row">
+                <div class="col-md-6">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label asp-for="Nome" class="control-label"></label>
+                            </div>
+                            <div class="col-md-7">
+                                <input asp-for="Nome" class="form-control" />
+                                <span asp-validation-for="Nome" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label asp-for="Documento" class="control-label"></label>
+                            </div>
+                            <div class="col-md-7">
+                                <input asp-for="Documento" class="form-control" />
+                                <span asp-validation-for="Documento" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label asp-for="Endereco" class="control-label"></label>
+                            </div>
+                            <div class="col-md-7">
+                                <input asp-for="Endereco" class="form-control" />
+                                <span asp-validation-for="Endereco" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label asp-for="Formacao" class="control-label"></label>
+                            </div>
+                            <div class="col-md-7">
+                                <input asp-for="Formacao" class="form-control" />
+                                <span asp-validation-for="Formacao" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label asp-for="DataInclusao" class="control-label"></label>
+                            </div>
+                            <div class="col-md-7">
+                                <input asp-for="DataInclusao" class="form-control" />
+                                <span asp-validation-for="DataInclusao" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label asp-for="DataAlteracao" class="control-label"></label>
+                            </div>
+                            <div class="col-md-7">
+                                <input asp-for="DataAlteracao" class="form-control" />
+                                <span asp-validation-for="DataAlteracao" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row col-md-12">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <input type="submit" value="Salvar" class="btn btn-success col-md-12" />
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<script>
+    $("#CPF").mask('000.000.000-00', { reverse: true });
+    $("#Celular")
+        .mask("(99) 9999-9999?9")
+        .focusout(function (event) {
+            var target, phone, element;
+            target = (event.currentTarget) ? event.currentTarget : event.srcElement;
+            phone = target.value.replace(/\D/g, '');
+            element = $(target);
+            element.unmask();
+            if (phone.length > 10) {
+                element.mask("(99) 99999-999?9");
+            } else {
+                element.mask("(99) 9999-9999?9");
+            }
+        });
+</script>

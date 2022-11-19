@@ -1,0 +1,43 @@
+﻿@model ListagemPrestadoresModel
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nome
+            </th>
+            <th>
+                Documento
+            </th>
+            <th>
+                Formação
+            </th>
+            <th>
+                Endereço
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListaPrestadores)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Documento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Formacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Endereco)
+            </td>
+            <td>
+                @Html.ActionLink("Dar Feedback!", "Feedback")
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
