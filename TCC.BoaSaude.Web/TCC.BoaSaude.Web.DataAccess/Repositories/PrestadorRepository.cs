@@ -15,7 +15,17 @@ namespace TCC.BoaSaude.Web.Infrastructure.Repositories
 
         public List<PrestadorDTO> ListarPrestadores()
         {
-            return new List<PrestadorDTO>();
+            return new List<PrestadorDTO>() 
+            { 
+                new PrestadorDTO(){ Nome = "Dr. Wagner", Documento = "1" },
+                new PrestadorDTO(){ Nome = "Dr. Francis", Documento = "2" },
+                new PrestadorDTO(){ Nome = "Dr. Tulio", Documento = "3" },
+                new PrestadorDTO(){ Nome = "Dr. Ulisses", Documento = "4" },
+                new PrestadorDTO(){ Nome = "Dra. Luana", Documento = "5" },
+                new PrestadorDTO(){ Nome = "Dr. Daiana", Documento = "6" },
+                new PrestadorDTO(){ Nome = "Dr. Thiago", Documento = "7" },
+                new PrestadorDTO(){ Nome = "Dr. Pedro", Documento = "8" },
+            };
             //List<VeiculoDTO> retorno = Get<List<PrestadorDTO>>($"{_rotaAutenticacao}/disponiveis", null, null);
             //return retorno;
         }

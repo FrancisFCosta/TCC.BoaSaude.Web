@@ -1,0 +1,116 @@
+﻿@model RegistroAtendimentoModel
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<div id="filtro-listagem-veiculo">
+    <div class="row">
+        <div class="col-md-12 section-header" style="text-align: left; border-bottom: 1px solid; border-bottom-color: #eaeaea; padding-bottom:10px;">
+            <h3 class="title">
+                Registro de Atendimento
+            </h3>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-5">
+            <label asp-for="DocumentoPrestador" class="control-label"></label>
+        </div>
+        <div class="col-md-5">
+            @Html.DropDownListFor(s => s.DocumentoPrestador, Model.ListaPrestadores)
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-4" style="vertical-align: middle; ">
+            <label class="control-label">Associado</label>
+        </div>
+        <div class="col-md-5">
+            @Html.DropDownListFor(s => s.DocumentoAssociado, Model.ListaAssociados)
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-5">
+            <label asp-for="DataAtendimento" class="control-label"></label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="DataAtendimento" class="form-control" />
+            <span asp-validation-for="DataAtendimento" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-5">
+            <label asp-for="ValorConsulta" class="control-label"></label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="ValorConsulta" class="form-control" />
+            <span asp-validation-for="ValorConsulta" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-5">
+            <label asp-for="ValorCoparticipacao" class="control-label"></label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="ValorCoparticipacao" class="form-control" />
+            <span asp-validation-for="ValorCoparticipacao" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+                <center>
+                    <a href='@Url.Action("CadastrarPrestador", "CadastroPrestador")'>
+                        <input type='button' class="btn btn-success" value='Salvar Atendimento' />
+                    </a>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+
+<script>
+    var URL_FILTRO_DATA = '@Url.Action("ListarPorPeriodo", "ListagemAluguel")';
+
+    function aoClicarEmFiltrar() {
+        var data = {
+            periodoInicio: $('#PeriodoInicio').val(),
+            periodoFinal: $('#PeriodoFinal').val()
+        }
+        chamadaGET(URL_FILTRO_DATA, data, ListarPorPeriodoSucesso);
+    }
+
+    function ListarPorPeriodoSucesso(data) {
+        if (data) {
+            $('#grid-listagem-luguel').html(data);
+            $('#grid-listagem-luguel').load();
+        }
+    }
+</script>
+

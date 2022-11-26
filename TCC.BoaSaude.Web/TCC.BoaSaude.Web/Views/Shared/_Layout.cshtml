@@ -22,7 +22,7 @@
                             <a class="nav-link  text-white" asp-area="" asp-controller="CadastroPrestador" asp-action="Index"> <span style="text-overflow: ellipsis; max-width:20px;">Prestadores</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  text-white" asp-area="" asp-controller="RegistroAtendimento" asp-action="Atendimento"> <span style="text-overflow: ellipsis; max-width:20px;">Atendimentos</span></a>
+                            <a class="nav-link  text-white" asp-area="" asp-controller="Atendimento" asp-action="Index"> <span style="text-overflow: ellipsis; max-width:20px;">Atendimentos</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link  text-white" asp-area="" asp-controller="CadastroUsuario" asp-action="Login"> <span style="text-overflow: ellipsis; max-width:20px;"> @(@ViewBag.UsuarioLogado ?? false ? String.Format("Olá {0}!", !String.IsNullOrWhiteSpace(@ViewBag.Nome) ? @ViewBag.Nome : "Usuário") : "Entrar")</span></a>
