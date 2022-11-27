@@ -17,33 +17,33 @@
 <br />
 
 <div class="form-group">
-    <div class="row">
-        <div class="col-md-5">
-            <label asp-for="DocumentoPrestador" class="control-label"></label>
-        </div>
-        <div class="col-md-5">
-            @Html.DropDownListFor(s => s.DocumentoPrestador, Model.ListaPrestadores)
-        </div>
-    </div>
-</div>
-
-<div class="form-group">
-    <div class="row">
-        <div class="col-md-4" style="vertical-align: middle; ">
-            <label class="control-label">Associado</label>
-        </div>
-        <div class="col-md-5">
-            @Html.DropDownListFor(s => s.DocumentoAssociado, Model.ListaAssociados)
-        </div>
-    </div>
-</div>
-
-<div class="form-group">
-    <div class="row">
-        <div class="col-md-5">
-            <label asp-for="DataAtendimento" class="control-label"></label>
+    <div class="row" style="text-align: right">
+        <div class="col-md-4">
+            <label class="control-label">Prestadores</label>
         </div>
         <div class="col-md-7">
+            @Html.DropDownListFor(s => s.DocumentoPrestador, Model.ListaPrestadores, htmlAttributes: new { @class = "col-md-12 form-control" })
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="row" style="text-align: right">
+        <div class="col-md-4">
+            <label class="control-label">Associado</label>
+        </div>
+        <div class="col-md-7">
+            @Html.DropDownListFor(s => s.DocumentoAssociado, Model.ListaAssociados, htmlAttributes: new { @class = "col-md-12 form-control" })
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="row" style="text-align: right">
+        <div class="col-md-4">
+            <label asp-for="DataAtendimento" class="control-label"></label>
+        </div>
+        <div class="col-md-3">
             <input asp-for="DataAtendimento" class="form-control" />
             <span asp-validation-for="DataAtendimento" class="text-danger"></span>
         </div>
@@ -52,22 +52,17 @@
 
 <div class="form-group">
     <div class="row">
-        <div class="col-md-5">
-            <label asp-for="ValorConsulta" class="control-label"></label>
+        <div class="offset-sm-1 col-sm-3" style="text-align: right">
+            <label asp-for="ValorConsulta" class="control-label">Valor Consulta</label>
         </div>
-        <div class="col-md-7">
+        <div class="col-sm-3">
             <input asp-for="ValorConsulta" class="form-control" />
             <span asp-validation-for="ValorConsulta" class="text-danger"></span>
         </div>
-    </div>
-</div>
-
-<div class="form-group">
-    <div class="row">
-        <div class="col-md-5">
-            <label asp-for="ValorCoparticipacao" class="control-label"></label>
+        <div class="col-sm-2" style="text-align: right">
+            <label asp-for="ValorCoparticipacao" class="control-label">Coparticipação</label>
         </div>
-        <div class="col-md-7">
+        <div class="col-sm-2">
             <input asp-for="ValorCoparticipacao" class="form-control" />
             <span asp-validation-for="ValorCoparticipacao" class="text-danger"></span>
         </div>

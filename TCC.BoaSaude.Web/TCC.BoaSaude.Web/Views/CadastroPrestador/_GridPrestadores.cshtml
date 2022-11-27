@@ -26,10 +26,10 @@
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Documento)
+                @Html.ActionLink(item.Documento, "CadastrarPrestador", "CadastroPrestador", new { documento = item.Documento }, null)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Formacao)
+                @Html.DisplayFor(modelItem => item.Formacao.Curso)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Endereco)

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 using TCC.BoaSaude.Web.Business.BLL;
 using TCC.BoaSaude.Web.Entidades.DTO;
 using TCC.BoaSaude.Web.Models;
@@ -30,12 +31,19 @@ namespace TCC.BoaSaude.Web.Controllers
 
         public IActionResult CadastrarPrestador(string documento)
         {
+            PrestadorModel prestador = null;
+
             if (!string.IsNullOrWhiteSpace(documento))
             {
-                //Todo editar
+                var prestadoresResult = _prestadorBusiness.ListarPrestadores().FirstOrDefault(p => p.Documento == documento.Trim());
+                prestador = new PrestadorModel(prestadoresResult);
+            }
+            else
+            {
+                prestador = new PrestadorModel();
             }
 
-            return View(new PrestadorModel());
+            return View(prestador);
         }
     }
 }
