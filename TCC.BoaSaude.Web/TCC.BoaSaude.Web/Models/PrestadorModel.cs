@@ -10,8 +10,8 @@ namespace TCC.BoaSaude.Web.Models
         public string Documento { get; set; }
         public string Endereco { get; set; }
         public FormacaoDTO Formacao { get; set; }
-        public DateTime DataInclusao { get; set; }
-        public DateTime DataAlteracao { get; set; }
+        public DateTime? DataInclusao { get; set; }
+        public DateTime? DataAlteracao { get; set; }
         public string Especialidade { get;  set; }
 
         public PrestadorModel() { }
