@@ -12,7 +12,7 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "URL_BASE_API_INTEGRATION": "https://localhost:44344/api/",
+        "URL_BASE_API_INTEGRATION": "https://localhost:44365",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
@@ -21,7 +21,7 @@
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "URL_BASE_API_INTEGRATION": "https://localhost:44344/api/"
+        "URL_BASE_API_INTEGRATION": "https://localhost:44365"
       },
       "applicationUrl": "https://localhost:5001;http://localhost:5000"
     }

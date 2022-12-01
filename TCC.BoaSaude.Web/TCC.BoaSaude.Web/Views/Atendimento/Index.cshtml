@@ -19,10 +19,11 @@
 <div class="form-group">
     <div class="row">
         <div class="col-md-4">
-            <label class="control-label">Prestadores</label>
+            <label class="control-label">Prestador</label>
         </div>
         <div class="col-md-7">
-            @Html.DropDownListFor(s => s.DocumentoPrestador, Model.ListaPrestadores, htmlAttributes: new { @class = "col-md-12 form-control" })
+            <label asp-for="Prestador.Nome">@(Model?.Prestador?.Nome)</label>
+            <input asp-for="Prestador.Documento" type="hidden" />
         </div>
     </div>
 </div>
@@ -30,10 +31,21 @@
 <div class="form-group">
     <div class="row">
         <div class="col-md-4">
-            <label class="control-label">Associado</label>
+            <label class="control-label">Nome Associado</label>
         </div>
         <div class="col-md-7">
-            @Html.DropDownListFor(s => s.DocumentoAssociado, Model.ListaAssociados, htmlAttributes: new { @class = "col-md-12 form-control" })
+            <input asp-for="NomeAssociado" class="form-control" />
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-4">
+            <label class="control-label">CPF do Associado</label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="DocumentoAssociado" class="form-control" />
         </div>
     </div>
 </div>
@@ -63,7 +75,7 @@
             <label asp-for="ValorCoparticipacao" class="control-label">Coparticipação</label>
         </div>
         <div class="col-sm-2">
-            <input asp-for="ValorCoparticipacao" class="form-control" />
+            <input asp-for="ValorCoparticipacao" class="form-control" disabled="disabled" />
             <span asp-validation-for="ValorCoparticipacao" class="text-danger"></span>
         </div>
     </div>
@@ -90,22 +102,47 @@
 <br />
 <br />
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
 <script>
+
     var URL_FILTRO_DATA = '@Url.Action("ListarPorPeriodo", "ListagemAluguel")';
+    var URL_CALCULO_COPARTICIPACAO = '@Url.Action("CalcularCoparticipacao", "Atendimento")';
 
-    function aoClicarEmFiltrar() {
-        var data = {
-            periodoInicio: $('#PeriodoInicio').val(),
-            periodoFinal: $('#PeriodoFinal').val()
-        }
-        chamadaGET(URL_FILTRO_DATA, data, ListarPorPeriodoSucesso);
-    }
+    $(document).ready(function () {
 
-    function ListarPorPeriodoSucesso(data) {
-        if (data) {
-            $('#grid-listagem-luguel').html(data);
-            $('#grid-listagem-luguel').load();
+        $("#ValorConsulta").change(function () { 
+            if ($("#Prestador_Documento").val() && $("#DocumentoAssociado").val() && $("#ValorConsulta").val()) {
+
+                var data = {
+                    doctoPrestador: $("#Prestador_Documento").val(),
+                    doctoAssociado: $("#DocumentoAssociado").val(),
+                    valorConsulta: parseFloat($("#ValorConsulta").val())
+                }
+                chamadaGET(URL_CALCULO_COPARTICIPACAO, data, retornoCoparticipacao);
+            }
+        });
+
+        function aoClicarEmFiltrar() {
+            var data = {
+                periodoInicio: $('#PeriodoInicio').val(),
+                periodoFinal: $('#PeriodoFinal').val()
+            }
+            chamadaGET(URL_FILTRO_DATA, data, ListarPorPeriodoSucesso);
         }
-    }
+
+        function retornoCoparticipacao(data) {
+            if (data) {
+                $('#ValorCoparticipacao').val(data);
+            }
+        }
+
+        function ListarPorPeriodoSucesso(data) {
+            if (data) {
+                $('#grid-listagem-luguel').html(data);
+                $('#grid-listagem-luguel').load();
+            }
+        }
+    });
 </script>
 

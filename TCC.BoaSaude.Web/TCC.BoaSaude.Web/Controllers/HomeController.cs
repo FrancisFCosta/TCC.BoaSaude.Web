@@ -11,7 +11,7 @@ namespace TCC.BoaSaude.Web.Controllers
         public ActionResult Index()
         {
             base.PreencherViewBagUsuarioLogado();
-            return RedirectToAction("Index", "Atendimento");
+            return RedirectToAction("Index", "CadastroPrestador");
         }
     }
 }

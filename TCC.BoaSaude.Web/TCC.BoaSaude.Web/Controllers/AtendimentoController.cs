@@ -8,30 +8,26 @@ namespace TCC.BoaSaude.Web.Controllers
 {
     public class AtendimentoController : BaseController
     {
-        private readonly PrestadorBusiness _prestadorBusiness;
-        private readonly AssociadoBusiness _associadoBusiness;
-
+        private readonly AtendimentoBusiness _atendimentoBusiness;
         public AtendimentoController()
         {
-            _prestadorBusiness = new PrestadorBusiness();
-            _associadoBusiness = new AssociadoBusiness();
+            _atendimentoBusiness = new AtendimentoBusiness();
         }
-        public IActionResult Index()
+
+        public IActionResult Index(string doctoPrestador, string nomePrestador)
         {
-            List<PrestadorDTO> listaPrestadores = new List<PrestadorDTO>();
-            List<AssociadoDTO> listaAssociados = new List<AssociadoDTO>();
+            if (!string.IsNullOrWhiteSpace(doctoPrestador) || !string.IsNullOrWhiteSpace(nomePrestador))
+            {
+                var prestador = new PrestadorDTO() { Documento = doctoPrestador, Nome = nomePrestador };
+                return View(new RegistroAtendimentoModel(prestador));
+            }
 
-            var prestadoresResult = _prestadorBusiness.ListarPrestadores();
-            var associadosResult = _associadoBusiness.ListarAssociados();
+            return View(new RegistroAtendimentoModel(null));
+        }
 
-            if (prestadoresResult != null)
-                listaPrestadores = prestadoresResult;
-
-            if (associadosResult != null)
-                listaAssociados = associadosResult;
-
-            base.PreencherViewBagUsuarioLogado();
-            return View(new RegistroAtendimentoModel(listaPrestadores, listaAssociados));
+        public double CalcularCoparticipacao(string doctoPrestador, string doctoAssociado, double valorConsulta) 
+        {
+            return _atendimentoBusiness.CalcularCoparticipacao(doctoPrestador, doctoAssociado, valorConsulta);
         }
     }
 }

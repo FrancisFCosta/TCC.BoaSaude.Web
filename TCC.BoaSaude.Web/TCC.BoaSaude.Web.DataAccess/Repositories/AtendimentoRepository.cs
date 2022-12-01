@@ -1,16 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using TCC.BoaSaude.Web.Entidades.DTO;
 
 namespace TCC.BoaSaude.Web.Infrastructure.Repositories
 {
-    public class AssociadoRepository : BaseRepository.BaseRepository
+    public class AtendimentoRepository : BaseRepository.BaseRepository
     {
         private readonly string _rotaAutenticacao;
-        public AssociadoRepository() : base(Environment.GetEnvironmentVariable("URL_BASE_API_INTEGRATION"))
+        public AtendimentoRepository() : base(Environment.GetEnvironmentVariable("URL_BASE_API_INTEGRATION"))
         {
-            _rotaAutenticacao = "v1/associados";
+            _rotaAutenticacao = "/atendimento";
+        }
+
+        public double CalcularCoparticipacao(string doctoPrestador, string doctoAssociado, double valorConsulta) 
+        {
+            return Get<double>($"{_rotaAutenticacao}/valorCorpaticipacao/{doctoPrestador}/{doctoAssociado}/{valorConsulta}", null, null);
         }
 
         public List<AssociadoDTO> ListarAssociados()

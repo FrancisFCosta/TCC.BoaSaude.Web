@@ -35,7 +35,7 @@
                 @Html.DisplayFor(modelItem => item.Endereco)
             </td>
             <td>
-                @Html.ActionLink("Dar Feedback!", "Feedback")
+                @Html.ActionLink("Registrar Atendimento", "Index", "Atendimento", new { doctoPrestador = item.Documento, nomePrestador = item.Nome }, htmlAttributes: new { @class = "btn btn-info" })
             </td>
         </tr>
         }
