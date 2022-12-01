@@ -14,6 +14,10 @@ namespace TCC.BoaSaude.Web.Models
         public decimal ValorConsulta { get; set; }
         public decimal ValorCoparticipacao { get; set; }
 
+        public RegistroAtendimentoModel() 
+        {
+        }
+
         public RegistroAtendimentoModel(PrestadorDTO prestador)
         {
             Prestador = prestador;

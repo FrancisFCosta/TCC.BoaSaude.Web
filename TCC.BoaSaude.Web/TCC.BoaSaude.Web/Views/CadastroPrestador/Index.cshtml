@@ -21,21 +21,21 @@
         <div class="row">
             <div class="col-md-8" style="padding-top: 10%;">
                 <div class="row">
-                    <div class="col-md-4" style="vertical-align: middle;">
+                    <div class="col-md-6" style="vertical-align: middle;">
                         <label asp-for="Especialidade" class="control-label">Especialidade</label>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <input asp-for="Especialidade" class="form-control" />
                     </div>
                 </div>
             </div>
             <div class="col-md-4" style="padding-top: 10%;">
-                    <button href="#" id="filtro-data" class="btn btn-info" onclick="aoClicarEmFiltrar();" style="padding-left: 5%;">
-                        <span class="glyphicon glyphicon-star-empty">Filtrar</span>
-                    </button>
-                    <a href='@Url.Action("CadastrarPrestador", "CadastroPrestador")'>
-                        <input type='button' class="btn btn-success" value='+Novo' />
-                    </a>
+                <button href="#" id="filtro-data" class="btn btn-info" style="padding-left: 5%;">
+                    <span class="glyphicon glyphicon-star-empty">Filtrar</span>
+                </button>
+                <a href='@Url.Action("CadastrarPrestador", "CadastroPrestador")'>
+                    <input type='button' class="btn btn-success" value='+Novo' />
+                </a>
             </div>
         </div>
     </div>
@@ -43,26 +43,22 @@
 <br />
 <br />
 
-<div id="grid-listagem-luguel" style="overflow-x: scroll;">
+<div id="grid-listagem-prestadores" style="overflow-x: scroll;">
     @Html.Partial("_GridPrestadores", Model)
 </div>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>
-    var URL_FILTRO_DATA = '@Url.Action("ListarPorPeriodo", "ListagemAluguel")';
+    var URL_FILTRO_ESPECIALIDADE = '@Url.Action("Index", "CadastroPrestador")';
 
-    function aoClicarEmFiltrar() {
-        var data = {
-            periodoInicio: $('#PeriodoInicio').val(),
-            periodoFinal: $('#PeriodoFinal').val()
-        }
-        chamadaGET(URL_FILTRO_DATA, data, ListarPorPeriodoSucesso);
-    }
+    $(document).ready(function () {
+        $("#filtro-data").click(function () {
+            if ($("#Especialidade").val()) {
+                var especialidade = $("#Especialidade").val();
+                location.href = URL_FILTRO_ESPECIALIDADE + "?termo=" + especialidade;
+            }
+        });
 
-    function ListarPorPeriodoSucesso(data) {
-        if (data) {
-            $('#grid-listagem-luguel').html(data);
-            $('#grid-listagem-luguel').load();
-        }
-    }
+
+    });
 </script>
 

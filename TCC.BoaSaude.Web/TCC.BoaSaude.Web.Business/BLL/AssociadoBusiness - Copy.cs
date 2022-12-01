@@ -15,7 +15,7 @@ namespace TCC.BoaSaude.Web.Business.BLL
         }
         public double CalcularCoparticipacao(string doctoPrestador, string doctoAssociado, double valorConsulta)
         {
-            return _atendimentoRepository.CalcularCoparticipacao(doctoPrestador, doctoAssociado, valorConsulta);
+            return _atendimentoRepository.CalcularCoparticipacao("12345678910", doctoAssociado, valorConsulta);
         }
         public List<AssociadoDTO> ListarAssociados()
         {

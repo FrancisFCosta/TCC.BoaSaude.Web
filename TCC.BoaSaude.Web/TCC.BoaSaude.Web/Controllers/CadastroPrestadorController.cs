@@ -16,17 +16,20 @@ namespace TCC.BoaSaude.Web.Controllers
             _prestadorBusiness = new PrestadorBusiness();
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string termo)
         {
             List<PrestadorDTO> listaPrestadores = new List<PrestadorDTO>();
 
-            var prestadoresResult = _prestadorBusiness.ListarPrestadores();
+            if (!string.IsNullOrWhiteSpace(termo))
+            {
+                var prestadoresResult = _prestadorBusiness.ListarPrestadores(termo);
 
-            if (prestadoresResult != null)
-                listaPrestadores = prestadoresResult;
+                if (prestadoresResult != null)
+                    listaPrestadores = prestadoresResult;
+            }
 
             base.PreencherViewBagUsuarioLogado();
-            return View(new ListagemPrestadoresModel(listaPrestadores));
+            return View(new ListagemPrestadoresModel(termo, listaPrestadores));
         }
 
         public IActionResult CadastrarPrestador(string documento)
@@ -35,7 +38,7 @@ namespace TCC.BoaSaude.Web.Controllers
 
             if (!string.IsNullOrWhiteSpace(documento))
             {
-                var prestadoresResult = _prestadorBusiness.ListarPrestadores().FirstOrDefault(p => p.Documento == documento.Trim());
+                var prestadoresResult = _prestadorBusiness.ListarPrestadores(documento).FirstOrDefault(p => p.Documento == documento.Trim());
                 prestador = new PrestadorModel(prestadoresResult);
             }
             else

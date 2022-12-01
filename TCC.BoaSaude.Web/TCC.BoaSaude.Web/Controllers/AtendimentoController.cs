@@ -29,5 +29,13 @@ namespace TCC.BoaSaude.Web.Controllers
         {
             return _atendimentoBusiness.CalcularCoparticipacao(doctoPrestador, doctoAssociado, valorConsulta);
         }
+        public IActionResult SalvarAtendimento(RegistroAtendimentoModel model)
+        {
+            return View("AtendimentoConcluido");
+        }
+        public IActionResult AtendimentoConcluido(RegistroAtendimentoModel model)
+        {
+            return View("AtendimentoConcluido");
+        }
     }
 }

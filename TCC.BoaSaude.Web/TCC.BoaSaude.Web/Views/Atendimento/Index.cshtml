@@ -90,9 +90,7 @@
             <div class="col-md-6"></div>
             <div class="col-md-6">
                 <center>
-                    <a href='@Url.Action("CadastrarPrestador", "CadastroPrestador")'>
-                        <input type='button' class="btn btn-success" value='Salvar Atendimento' />
-                    </a>
+                    <input type='button' class="btn btn-success" value='Salvar Atendimento' id="btnSalvarAtendimentoMedico" />
                 </center>
             </div>
         </div>
@@ -108,19 +106,27 @@
 
     var URL_FILTRO_DATA = '@Url.Action("ListarPorPeriodo", "ListagemAluguel")';
     var URL_CALCULO_COPARTICIPACAO = '@Url.Action("CalcularCoparticipacao", "Atendimento")';
+    var URL_SALVAR_ATENDIMENTO = '@Url.Action("SalvarAtendimento", "Atendimento")';
+    var URL_ATENDIMENTO_CONCLUIDO = '@Url.Action("SalvarAtendimento", "Atendimento")';
 
     $(document).ready(function () {
 
-        $("#ValorConsulta").change(function () { 
+        $("#ValorConsulta").change(function () {
             if ($("#Prestador_Documento").val() && $("#DocumentoAssociado").val() && $("#ValorConsulta").val()) {
 
                 var data = {
-                    doctoPrestador: $("#Prestador_Documento").val(),
-                    doctoAssociado: $("#DocumentoAssociado").val(),
+                    doctoPrestador: apenasNumeros($("#Prestador_Documento").val()),
+                    doctoAssociado: apenasNumeros($("#DocumentoAssociado").val()),
                     valorConsulta: parseFloat($("#ValorConsulta").val())
                 }
                 chamadaGET(URL_CALCULO_COPARTICIPACAO, data, retornoCoparticipacao);
             }
+        });
+
+        $("#btnSalvarAtendimentoMedico").click(function () {
+            chamadaAjaxPOST(URL_SALVAR_ATENDIMENTO, null, function(){
+            location.href = URL_ATENDIMENTO_CONCLUIDO;
+            }, function(){ alert("Falha ao Salvar Atendimento, tente novamente mais tarde!")})
         });
 
         function aoClicarEmFiltrar() {
@@ -142,6 +148,12 @@
                 $('#grid-listagem-luguel').html(data);
                 $('#grid-listagem-luguel').load();
             }
+        }
+
+        function apenasNumeros(string)
+        {
+            var numsStr = string.replace(/[^0-9]/g,'');
+            return parseInt(numsStr);
         }
     });
 </script>

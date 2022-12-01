@@ -13,9 +13,9 @@ namespace TCC.BoaSaude.Web.Business.BLL
         {
             _prestadorRepository = new PrestadorRepository();
         }
-        public List<PrestadorDTO> ListarPrestadores()
+        public List<PrestadorDTO> ListarPrestadores(string termo)
         {
-            return _prestadorRepository.ListarPrestadores();
+            return _prestadorRepository.ListarPrestadores(termo);
         }
     }
 }

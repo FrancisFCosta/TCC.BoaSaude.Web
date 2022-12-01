@@ -61,28 +61,34 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label asp-for="DataInclusao" class="control-label"></label>
-                            </div>
-                            <div class="col-md-7">
-                                <input asp-for="DataInclusao" class="form-control" />
-                                <span asp-validation-for="DataInclusao" class="text-danger"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label asp-for="DataAlteracao" class="control-label"></label>
-                            </div>
-                            <div class="col-md-7">
-                                <input asp-for="DataAlteracao" class="form-control" />
-                                <span asp-validation-for="DataAlteracao" class="text-danger"></span>
+                    @if (Model.DataInclusao != null)
+                    {
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label asp-for="DataInclusao" class="control-label"></label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input asp-for="DataInclusao" class="form-control" />
+                                    <span asp-validation-for="DataInclusao" class="text-danger"></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    }
+                    @if (Model.DataAlteracao != null)
+                    {
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label asp-for="DataAlteracao" class="control-label"></label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input asp-for="DataAlteracao" class="form-control" />
+                                    <span asp-validation-for="DataAlteracao" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
                 <br />
                 <div class="row col-md-12">
@@ -97,22 +103,24 @@
     </div>
 </div>
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
-<script>
-    $("#CPF").mask('000.000.000-00', { reverse: true });
-    $("#Celular")
-        .mask("(99) 9999-9999?9")
-        .focusout(function (event) {
-            var target, phone, element;
-            target = (event.currentTarget) ? event.currentTarget : event.srcElement;
-            phone = target.value.replace(/\D/g, '');
-            element = $(target);
-            element.unmask();
-            if (phone.length > 10) {
-                element.mask("(99) 99999-999?9");
-            } else {
-                element.mask("(99) 9999-9999?9");
-            }
-        });
-</script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+    <script>
+        $("#CPF").mask('000.000.000-00', { reverse: true });
+        $("#Celular")
+            .mask("(99) 9999-9999?9")
+            .focusout(function (event) {
+                var target, phone, element;
+                target = (event.currentTarget) ? event.currentTarget : event.srcElement;
+                phone = target.value.replace(/\D/g, '');
+                element = $(target);
+                element.unmask();
+                if (phone.length > 10) {
+                    element.mask("(99) 99999-999?9");
+                } else {
+                    element.mask("(99) 9999-9999?9");
+                }
+            });
+    </script>

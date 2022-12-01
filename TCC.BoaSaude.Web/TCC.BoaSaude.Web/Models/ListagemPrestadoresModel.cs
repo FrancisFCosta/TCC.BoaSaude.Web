@@ -9,10 +9,10 @@ namespace TCC.BoaSaude.Web.Models
         public List<PrestadorModel> ListaPrestadores { get; set; }
         public string Especialidade{ get; set; }
 
-        public ListagemPrestadoresModel(List<PrestadorDTO> listaPrestadorDTO)
+        public ListagemPrestadoresModel(string especialidade, List<PrestadorDTO> listaPrestadorDTO)
         {
             ListaPrestadores = new List<PrestadorModel>();
-
+            Especialidade = especialidade;
             if (listaPrestadorDTO != null)
             {
                 foreach (var prestador  in listaPrestadorDTO)
